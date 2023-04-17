@@ -21,13 +21,10 @@
   </head>
 
   <body>
-    <!-- current time and date thing -->
-    
-
-    <!-- main weather card -->
-    <div class="card">
-    <div class="current-time"></div>
-    <div class="current-date"></div>
+    <!-- main card -->
+    <main class="card">
+      <div class="current-time"></div>
+      <div class="current-date"></div>
       <div class="search">
         <input
           type="text"
@@ -51,15 +48,90 @@
           </svg>
         </button>
       </div>
-      <div class="weather">
-        <h3 class="city">Weather in Austin</h3>
-        <h1 class="temp">72°</h1>
-        <img src="" alt="" class="icon" />
-        <div class="description">Cloudy</div>
-        <div class="humidity">Humidity: 30%</div>
-        <div class="wind">Wind speed: 3.2 mph</div>
+
+      <!-- current weather -->
+      <div class="current-weather-container">
+        <div class="current-weather">
+          <div class="others" id="current-weather-items">
+            <div class="weather-item">
+              <div>Location:</div>
+              <div id="location"></div>
+            </div>
+            <div class="weather-item">
+              <div>Conditions:</div>
+              <div id="current-condition"> </div>
+            </div>
+            <div class="weather-item">
+              <div>Temperature:</div>
+              <div id="current-temperature"> </div>
+            </div>
+            <div class="weather-item">
+              <div>Humidity:</div>
+              <div id="current-humidity"> </div>
+            </div>
+            <div class="weather-item">
+              <div>Wind Speed:</div>
+              <div id="current-windspeed"> </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </main>
+
+    <!-- future forcast -->
+    <section class="future-forcast">
+      <div class="today" id="current-temp">
+        <div id="icon-current"></div>
+        <div class="other">
+          <div class="day">TODAY</div>
+          <div id="current-day" class="temp">Day: °F</div>
+          <div id="current-night" class="temp">Night: °F</div>
+      </div>
+      </div>
+
+      <div class="weather-forecast" id="weather-forecast">
+        <article class="weather-forecast-item">
+          <div class="day" id="first-day">someDay</div>
+          <div id="icon-one"></div>
+          <div id="day-one">Day: °F</div>
+          <div id="night-one">Night: °F</div>
+          <div id="humidity-one">humidity</div>
+          <div id="windspeed-one">windspeed</div>
+        </article>
+        <article class="weather-forecast-item">
+          <div class="day" id="second-day">someDay</div>
+          <div id="icon-two"></div>
+          <div id="day-two">Day: °F</div>
+          <div id="night-two">Night: °F</div>
+          <div id="humidity-two">humidity</div>
+          <div id="windspeed-two">windspeed</div>
+        </article>
+        <article class="weather-forecast-item">
+          <div class="day" id="third-day">someDay</div>
+          <div id="icon-three"></div>
+          <div id="day-three">Day: °F</div>
+          <div id="night-three">Night: °F</div>
+          <div id="humidity-three">humidity</div>
+          <div id="windspeed-three">windspeed</div>
+        </article>
+        <article class="weather-forecast-item">
+          <div class="day" id="fourth-day">someDay</div>
+          <div id="icon-four"></div>
+          <div id="day-four">Day: °F</div>
+          <div id="night-four">Night: °F</div>
+          <div id="humidity-four">humidity</div>
+          <div id="windspeed-four">windspeed</div>
+        </article>
+        <article class="weather-forecast-item">
+          <div class="day" id="fifth-day">someDay</div>
+          <div id="icon-five"></div>
+          <div id="day-five">Day: °F</div>
+          <div id="night-five">Night: °F</div>
+          <div id="humidity-five">humidity</div>
+          <div id="windspeed-five">windspeed</div>
+        </article>
+      </div>
+    </section>
 
     <script src="assets/script.js"></script>
   </body>

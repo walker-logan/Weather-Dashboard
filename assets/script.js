@@ -1,6 +1,7 @@
 var today = dayjs()
 var timeDisplayEl = document.querySelector('.current-time')
 var dateDisplayEl = document.querySelector('.current-date')
+var cities = JSON.parse(localStorage.getItem("cities")) || [];
 
 
 function displayTime() {
@@ -16,3 +17,8 @@ function displayDate() {
 };
 displayDate();
 setInterval(displayDate, 24 * 60 * 60 * 1000);
+
+function saveCity() {
+  localStorage.setItem("cities", JSON.stringify(cities));
+};
+

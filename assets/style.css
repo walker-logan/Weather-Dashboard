@@ -1,5 +1,5 @@
 * {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 body {
@@ -12,6 +12,7 @@ body {
 }
 
 .card {
+  position: relative;
   background: #000000d0;
   color: white;
   padding: 2em;
@@ -36,7 +37,7 @@ button {
   background: #7c7c7c2b;
   color: white;
   cursor: pointer;
-  transition: .5s ease-in-out;
+  transition: 0.5s ease-in-out;
 }
 
 button:hover {
@@ -46,10 +47,9 @@ button:hover {
 input.search-bar {
   outline: none;
   border: none;
-  padding: .4em;
+  padding: 0.4em;
   border-radius: 5px;
   background: #7c7c7c2b;
   color: white;
   font-size: 120%;
 }
-
