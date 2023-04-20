@@ -3,6 +3,7 @@
 }
 
 body {
+  /* box-sizing: border-box; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,3 +54,19 @@ input.search-bar {
   color: white;
   font-size: 120%;
 }
+
+.future-forcast {
+  background: #7c7c7c2b;
+  display: flex;
+  padding: 25px;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.future-forcast .weather-forecast {
+  display: flex;
+}
+
