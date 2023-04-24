@@ -57,6 +57,7 @@ input.search-bar {
 
 .future-forcast {
   background: #7c7c7c2b;
+  position: fixed;
   display: flex;
   padding: 25px;
   bottom: 0;
@@ -64,9 +65,14 @@ input.search-bar {
   width: 100%;
   align-items: center;
   justify-content: center;
+  overflow-x: auto;
 }
+
 
 .future-forcast .weather-forecast {
   display: flex;
 }
 
+.day {
+  margin: 0 3rem ;
+}

@@ -59,19 +59,19 @@
             </div>
             <div class="weather-item">
               <div>Conditions:</div>
-              <div id="current-condition"> </div>
+              <div id="current-condition"></div>
             </div>
             <div class="weather-item">
               <div>Temperature:</div>
-              <div id="current-temperature"> </div>
+              <div id="current-temperature"></div>
             </div>
             <div class="weather-item">
               <div>Humidity:</div>
-              <div id="current-humidity"> </div>
+              <div id="current-humidity"></div>
             </div>
             <div class="weather-item">
               <div>Wind Speed:</div>
-              <div id="current-windspeed"> </div>
+              <div id="current-windspeed"></div>
             </div>
           </div>
         </div>
@@ -80,16 +80,15 @@
 
     <!-- future forcast -->
     <section class="future-forcast">
-      <div class="today" id="current-temp">
-        <div id="icon-current"></div>
-        <div class="other">
+        <article class="weather-forecast" id="weather-forecast">
+          <div class="day" id="current-temp today">
+          <div id="icon-current"></div>
           <div class="day">TODAY</div>
           <div id="current-day" class="temp">Day: °F</div>
           <div id="current-night" class="temp">Night: °F</div>
-      </div>
-      </div>
-
-      <div class="weather-forecast" id="weather-forecast">
+          </div>
+          </div>  
+          </article>
         <article class="weather-forecast-item">
           <div class="day" id="first-day">someDay</div>
           <div id="icon-one"></div>
@@ -130,7 +129,7 @@
           <div id="humidity-five">humidity</div>
           <div id="windspeed-five">windspeed</div>
         </article>
-      </div>
+      </section>
     </section>
 
     <script src="assets/script.js"></script>
