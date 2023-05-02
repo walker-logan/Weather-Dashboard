@@ -95,7 +95,8 @@ function fetchWeatherData(cityName) {
       // Update the background image
       const imageUrl = unsplashData.results[0]?.urls.regular;
       if (imageUrl) {
-        $("body").css("background-image", `url(${imageUrl})`);
+        $(".card").css("background-image", `url(${imageUrl})`);
+        $(".weather-forecast-item").css("background-image", `url(${imageUrl})`);
       }
 
       // Fetch the forecast data and update the weather display
