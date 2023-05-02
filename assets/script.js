@@ -67,11 +67,11 @@ function updateWeatherDisplay(data) {
     weatherForecastElems
       .eq(i)
       .find("#humidity-" + (i + 1))
-      .text(forecast.main.humidity + "%");
+      .text("Humidity: " + forecast.main.humidity + "%");
     weatherForecastElems
       .eq(i)
       .find("#windspeed-" + (i + 1))
-      .text(forecast.wind.speed + " mph");
+      .text("Windspeed: " + forecast.wind.speed + " mph");
   }
 }
 
@@ -94,7 +94,7 @@ function fetchWeatherData(cityName) {
       // creating url for the api request using lat and lon
       const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
-      // Update the background image
+      // updating the background image
       const imageUrl = unsplashData.results[0]?.urls.regular;
       if (imageUrl) {
         $(".card").css("background-image", `url(${imageUrl})`);
