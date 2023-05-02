@@ -3,14 +3,11 @@ $(document).ready(function () {
   const searchButton = $("button");
   const searchBar = $(".search-bar");
 
-  // function to grab the city name
   function fetchWeatherData(city) {
     $.ajax({
       url: `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`,
       method: "GET",
     }).then(function (response) {
-      console.log("Ajax Reponse \n-------------");
-      console.log(response);
       const lat = response.coord.lat;
       const lon = response.coord.lon;
       const cityName = response.name;
@@ -20,16 +17,12 @@ $(document).ready(function () {
       fetchFiveDayForecast(lat, lon);
     });
   }
-  // console.log(city)
 
-  // function to grab the lat an lon and five day format
   function fetchFiveDayForecast(lat, lon) {
     $.ajax({
-      url: `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`,
+      url: `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`,
       method: "GET",
     }).then(function (response) {
-      console.log("Ajax Reponse \n-------------");
-      console.log(response);
       const forecastList = response.list;
       for (let i = 0; i < 5; i++) {
         const forecast = forecastList[i * 8];
@@ -39,8 +32,26 @@ $(document).ready(function () {
         const humidity = forecast.main.humidity;
         const windSpeed = forecast.wind.speed;
 
-        
+        $(`#icon-${i + 1}`).attr("src", `https://openweathermap.org/img/wn/${icon}.png`);
+        $(`#${i + 1}-day`).text(`${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`);
+        $(`#day-${i + 1}`).text(`Day: ${temp.toFixed(1)}°F`);
+        $(`#humidity-${i + 1}`).text(`Humidity: ${humidity}%`);
+        $(`#windspeed-${i + 1}`).text(`Wind Speed: ${windSpeed} MPH`);
       }
     });
   }
+
+  function handleSearch() {
+    const city = searchBar.val().trim();
+    if (city === "") return;
+    fetchWeatherData(city);
+    searchBar.val("");
+  }
+
+  searchButton.on("click", handleSearch);
+  searchBar.on("keypress", function (event) {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  });
 });
