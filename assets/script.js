@@ -125,8 +125,6 @@ function handleKeyPress(e) {
   }
 }
 
-searchBar.on("keydown", handleKeyPress);
-
 // event listener for the search button click event
 searchButton.on("click", () => {
   // getting the city name entered in the search bar and trim any leading/trailing whitespace (this was also stack overflow)
