@@ -5,16 +5,13 @@
 }
 
 body {
-  background: rgba(210, 238, 255, 0.512);
+  background: rgb(255, 255, 255);
   background: radial-gradient(
     circle,
-    rgba(210, 238, 255, 0.534) 0%,
-    rgba(0, 80, 177, 0.553) 100%
+    rgba(255, 255, 255, 1) 0%,
+    rgba(175, 175, 175, 1) 100%
   );
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  text-shadow: 2px 2px 4px #000000c6;
+  /* text-shadow: 2px 2px 4px #000000c6; */
   min-height: 100vh;
   min-width: 100vw;
   display: flex;
@@ -63,6 +60,7 @@ body {
   border: 1px solid #ccc;
   flex-grow: 1;
   margin-right: 10px;
+  box-shadow: 0 0px 20px rgba(0, 0, 0, 0.57);
 }
 
 button {
@@ -70,6 +68,7 @@ button {
   border: none;
   border-radius: 3px;
   cursor: pointer;
+  box-shadow: 0 0px 20px rgba(0, 0, 0, 0.57);
 }
 
 button svg {
@@ -80,6 +79,10 @@ button svg {
 #location,
 h2 {
   font-size: 2rem;
+}
+
+.api-answer {
+  font-size: 25px;
 }
 
 .current-weather-container {
@@ -96,6 +99,7 @@ h2 {
   flex-wrap: none;
   justify-content: center;
   width: 100%;
+  text-shadow: 0 0 6px rgb(0, 0, 0);
 }
 
 .weather-item {
@@ -118,10 +122,12 @@ h2 {
 .future-forecast {
   display: flex;
   overflow-x: auto;
-  gap: 20px;
+  gap: 30px;
+  padding: 2rem;
   width: 100%;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   justify-content: center;
+  text-shadow: 0 0 6px rgb(0, 0, 0);
 }
 
 .weather-forecast-item {
@@ -170,6 +176,12 @@ h2 {
   button svg {
     height: 1.25rem;
     width: 1.25rem;
+  }
+  h2 {
+    font-size: 1rem;
+  }
+  #location {
+    font-size: 50px;
   }
   .weather-forecast-item {
     min-width: 100px;
