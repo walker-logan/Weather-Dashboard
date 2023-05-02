@@ -18,9 +18,7 @@ function kelvinToFahrenheit(kelvin) {
   return ((kelvin - 273.15) * 9) / 5 + 32;
 }
 
-// function that's updating weather display
 function updateWeatherDisplay(data) {
-  // console.log('Updating weather display:', data);
   // getting city name and weather data list from response
   const cityName = data.city.name;
   const { list } = data;
@@ -28,14 +26,13 @@ function updateWeatherDisplay(data) {
   // updating current weather info
   locationElem.text(cityName);
   currentConditionElem.text(list[0].weather[0].description);
+
+  const currentIconId = list[0].weather[0].icon;
+  const currentIconUrl = `http://openweathermap.org/img/wn/${currentIconId}.png`;
+  $("#current-icon").attr("src", currentIconUrl);
+
   currentTemperatureElem.text(
     kelvinToFahrenheit(list[0].main.temp).toFixed(1) + "°F"
-  );
-  currentHighTemperatureElem.text(
-    kelvinToFahrenheit(list[0].main.temp_max).toFixed(1) + "°F"
-  );
-  currentLowTemperatureElem.text(
-    kelvinToFahrenheit(list[0].main.temp_min).toFixed(1) + "°F"
   );
   currentHumidityElem.text(list[0].main.humidity + "%");
   currentWindspeedElem.text(list[0].wind.speed + " mph");
