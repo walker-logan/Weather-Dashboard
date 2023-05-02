@@ -1,40 +1,23 @@
-var today = dayjs()
-var timeDisplayEl = document.querySelector('.current-time')
-var dateDisplayEl = document.querySelector('.current-date')
-var cities = JSON.parse(localStorage.getItem("cities")) || [];
-var apiKey = "2f5f412b8dc65ace9365b098b7f6537d"
+$(document).ready(function () {
+  const apiKey = "your_api_key_here";
+  const searchButton = $("button");
+  const searchBar = $(".search-bar");
 
-document.querySelector("button").addEventListener("click", function() {
-  var userInput = document.querySelector("input").value
-  searchWeather(userInput)
+  function fetchWeatherData(city) {
+    $.ajax({
+      url: `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`,
+      method: "GET",
+    }).then(function (response) {
+      const lat = response.coord.lat;
+      const lon = response.coord.lon;
+      const cityName = response.name;
+
+      $("#location").text(cityName);
+
+      fetchFiveDayForecast(lat, lon);
+    });
+  }
+
+  
+
 })
-
-function displayTime() {
-  var rightNow = dayjs().format('	h:mm:ss A');
-  timeDisplayEl.textContent = rightNow;
-};
-displayTime();
-setInterval(displayTime, 1000);
-
-function displayDate() {
-  var dateNOW = dayjs().format('dddd, MMMM D[,] YYYY');
-  dateDisplayEl.textContent = dateNOW;
-};
-displayDate();
-setInterval(displayDate, 24 * 60 * 60 * 1000);
-
-function saveCity() {
-  localStorage.setItem("cities", JSON.stringify(cities));
-};
-
-function searchWeather(city) {
-  var url = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`
-  fetch(url)
-  .then(function(res) {
-    return res.json()
-  })
-  .then(function(data) {
-    console.log(data)
-  })
-}
-
