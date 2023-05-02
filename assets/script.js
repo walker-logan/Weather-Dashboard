@@ -4,6 +4,9 @@ const apiKey = "2f5f412b8dc65ace9365b098b7f6537d";
 // DOM elements
 const searchButton = $("button");
 const searchBar = $(".search-bar");
+document
+  .querySelector(".search-bar")
+  .addEventListener("keydown", handleKeyPress);
 const locationElem = $("#location");
 const currentConditionElem = $("#current-condition");
 const currentTemperatureElem = $("#current-temperature");
@@ -91,14 +94,28 @@ function fetchWeatherData(cityName) {
     });
 }
 
+// function to make keyboard event for "enter"
+function handleKeyPress(e) {
+  if (e.key === "Enter") {
+
+    const cityName = searchBar.val().trim();    
+    if (cityName) {
+      searchBar.val("");
+      fetchWeatherData(cityName);
+    }
+  }
+}
+
+searchBar.on("keydown", handleKeyPress);
+
 // event listener for the search button click event
 searchButton.on("click", () => {
   // getting the city name entered in the search bar and trim any leading/trailing whitespace (this was also stack overflow)
   const cityName = searchBar.val().trim();
   if (cityName) {
+    searchBar.val("");
     fetchWeatherData(cityName);
     // clearing the search bar
-    searchBar.val("");
   } else {
     // displaying an alert if no city name was entered
     alert("Please enter a city name.");
