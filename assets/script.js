@@ -57,11 +57,13 @@ function updateWeatherDisplay(data) {
     weatherForecastElems
       .eq(i)
       .find("#day-" + (i + 1))
-      .text(kelvinToFahrenheit(forecast.main.temp).toFixed(1) + "°F");
+      .text("Day: " + kelvinToFahrenheit(forecast.main.temp).toFixed(1) + "°F");
     weatherForecastElems
       .eq(i)
       .find("#night-" + (i + 1))
-      .text(kelvinToFahrenheit(forecast.main.temp_min).toFixed(1) + "°F");
+      .text(
+        "Night: " + kelvinToFahrenheit(forecast.main.temp).toFixed(1) + "°F"
+      );
     weatherForecastElems
       .eq(i)
       .find("#humidity-" + (i + 1))
