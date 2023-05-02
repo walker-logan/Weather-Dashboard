@@ -1,5 +1,6 @@
-// api key
+// api keys
 const apiKey = "2f5f412b8dc65ace9365b098b7f6537d";
+const unsplashApiKey = "cWeAMr7JoG5aX85EOYSNS2YD2ryQtCqxUWSRwAhfs-M";
 
 // DOM elements
 const searchButton = $("button");
@@ -75,13 +76,32 @@ function updateWeatherDisplay(data) {
 // function to actually grab the weather data and then display it using .get
 function fetchWeatherData(cityName) {
   const cityUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
-  $.get(cityUrl)
-    .then((data) => {
-      // extracting lat and lon from data
-      const lat = data.coord.lat;
-      const lon = data.coord.lon;
+
+  // Fetch the background image from Unsplash
+  const unsplashUrl = `https://api.unsplash.com/search/photos?query=${cityName}&client_id=${unsplashApiKey}&per_page=1&orientation=landscape`;
+
+  // Fetch both the weather data and the Unsplash image
+  Promise.all([
+    $.get(cityUrl),
+    $.get(unsplashUrl)
+  ])
+    .then((responses) => {
+      const weatherData = responses[0];
+      const unsplashData = responses[1];
+
+      // extracting lat and lon from weather data
+      const lat = weatherData.coord.lat;
+      const lon = weatherData.coord.lon;
       // creating url for the api request using lat and lon
       const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+
+      // Update the background image
+      const imageUrl = unsplashData.results[0]?.urls.regular;
+      if (imageUrl) {
+        $("body").css("background-image", `url(${imageUrl})`);
+      }
+
+      // Fetch the forecast data and update the weather display
       return $.get(weatherUrl);
     })
     .then((data) => {
@@ -94,11 +114,32 @@ function fetchWeatherData(cityName) {
     });
 }
 
+// function fetchWeatherData(cityName) {
+//   const cityUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
+//   const unsplashUrl = `https://api.unsplash.com/search/photos?query=${cityName}&client_id=${unsplashApiKey}&per_pages=1&orientation=landscape`;
+//   Promise.all([$.get(cityUrl), $.get(unsplashUrl)])
+//     .then((data) => {
+//       // extracting lat and lon from data
+//       const lat = data.coord.lat;
+//       const lon = data.coord.lon;
+//       // creating url for the api request using lat and lon
+//       const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+//       return $.get(weatherUrl);
+//     })
+//     .then((data) => {
+//       updateWeatherDisplay(data);
+//     })
+//     .catch((error) => {
+//       // logging the error and displaying an alert message if there was an issue fetching the weather data
+//       console.error(error);
+//       alert("Error fetching weather data. Please try again.");
+//     });
+// }
+
 // function to make keyboard event for "enter"
 function handleKeyPress(e) {
   if (e.key === "Enter") {
-
-    const cityName = searchBar.val().trim();    
+    const cityName = searchBar.val().trim();
     if (cityName) {
       searchBar.val("");
       fetchWeatherData(cityName);

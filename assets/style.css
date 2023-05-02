@@ -5,7 +5,12 @@
 }
 
 body {
-  background-color: #f0f0f0;
+  background: rgb(210, 238, 255);
+  background: radial-gradient(
+    circle,
+    rgba(210, 238, 255, 1) 0%,
+    rgba(0, 81, 177, 1) 100%
+  );
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,12 +22,18 @@ body {
 /* main card */
 
 .card {
-  background-color: white;
+  background: rgb(0, 0, 0);
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 35, 74, 0.779) 100%
+  );
+  color: whitesmoke;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
+  max-width: 400px;
   width: 100%;
-  padding: 20px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,14 +59,15 @@ body {
 }
 
 button {
-  background-color: transparent;
+  background-color: whitesmoke;
   border: none;
+  border-radius: 3px;
   cursor: pointer;
 }
 
 button svg {
   height: 1.5rem;
-  width: 1.5rem;
+  width: 1.8rem;
 }
 
 .current-weather-container {
@@ -63,12 +75,14 @@ button svg {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  margin: 15px;
+  /* border: turquoise solid; */
 }
 
 .current-weather {
   display: flex;
   flex-wrap: none;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
 }
 
@@ -81,31 +95,41 @@ button svg {
 }
 
 #current-icon {
-  height: 5rem;
-  width: 5rem;
+  height: 8rem;
+  width: 8rem;
   margin-left: 10px;
+  /* border: turquoise solid; */
+
 }
 
 /* future forcast */
 .future-forecast {
   display: flex;
   overflow-x: auto;
-  gap: 10px;
+  gap: 20px;
   width: 100%;
   margin-top: 20px;
   justify-content: center;
 }
 
 .weather-forecast-item {
+  background: rgb(0, 0, 0);
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 35, 74, 0.779) 100%
+  );
+  color: whitesmoke;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5px;
   background-color: white;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.242);
   padding: 15px;
   min-width: 120px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.242);
+
 }
 
 .forecast-icon {
