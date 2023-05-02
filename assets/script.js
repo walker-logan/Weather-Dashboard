@@ -73,7 +73,7 @@ function updateWeatherDisplay(data) {
   }
 }
 
-// function to actually grab the weather data and then display it using .get
+// function to actually grab the weather data and then display it using .get and one promise
 function fetchWeatherData(cityName) {
   const cityUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
 
@@ -81,10 +81,7 @@ function fetchWeatherData(cityName) {
   const unsplashUrl = `https://api.unsplash.com/search/photos?query=${cityName}&client_id=${unsplashApiKey}&per_page=1&orientation=landscape`;
 
   // Fetch both the weather data and the Unsplash image
-  Promise.all([
-    $.get(cityUrl),
-    $.get(unsplashUrl)
-  ])
+  Promise.all([$.get(cityUrl), $.get(unsplashUrl)])
     .then((responses) => {
       const weatherData = responses[0];
       const unsplashData = responses[1];
@@ -113,28 +110,6 @@ function fetchWeatherData(cityName) {
       alert("Error fetching weather data. Please try again.");
     });
 }
-
-// function fetchWeatherData(cityName) {
-//   const cityUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
-//   const unsplashUrl = `https://api.unsplash.com/search/photos?query=${cityName}&client_id=${unsplashApiKey}&per_pages=1&orientation=landscape`;
-//   Promise.all([$.get(cityUrl), $.get(unsplashUrl)])
-//     .then((data) => {
-//       // extracting lat and lon from data
-//       const lat = data.coord.lat;
-//       const lon = data.coord.lon;
-//       // creating url for the api request using lat and lon
-//       const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
-//       return $.get(weatherUrl);
-//     })
-//     .then((data) => {
-//       updateWeatherDisplay(data);
-//     })
-//     .catch((error) => {
-//       // logging the error and displaying an alert message if there was an issue fetching the weather data
-//       console.error(error);
-//       alert("Error fetching weather data. Please try again.");
-//     });
-// }
 
 // function to make keyboard event for "enter"
 function handleKeyPress(e) {

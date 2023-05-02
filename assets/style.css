@@ -5,12 +5,17 @@
 }
 
 body {
-  background: rgb(210, 238, 255);
+  background: rgba(210, 238, 255, 0.512);
   background: radial-gradient(
     circle,
-    rgba(210, 238, 255, 1) 0%,
-    rgba(0, 81, 177, 1) 100%
+    rgba(210, 238, 255, 0.534) 0%,
+    rgba(0, 80, 177, 0.553) 100%
   );
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  min-width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,12 +30,12 @@ body {
   background: rgb(0, 0, 0);
   background: radial-gradient(
     circle,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 35, 74, 0.779) 100%
+    rgba(0, 0, 0, 0.605) 0%,
+    rgba(0, 35, 74, 0.596) 100%
   );
   color: whitesmoke;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgb(0, 0, 0);
   max-width: 400px;
   width: 100%;
   padding: 30px;
@@ -99,7 +104,6 @@ button svg {
   width: 8rem;
   margin-left: 10px;
   /* border: turquoise solid; */
-
 }
 
 /* future forcast */
@@ -116,20 +120,18 @@ button svg {
   background: rgb(0, 0, 0);
   background: radial-gradient(
     circle,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 35, 74, 0.779) 100%
+    rgba(0, 0, 0, 0.605) 0%,
+    rgba(0, 35, 74, 0.596) 100%
   );
   color: whitesmoke;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5px;
-  background-color: white;
   border-radius: 8px;
   padding: 15px;
   min-width: 120px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.242);
-
+  box-shadow: 0 4px 10px rgb(0, 0, 0);
 }
 
 .forecast-icon {
