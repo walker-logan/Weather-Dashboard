@@ -7,6 +7,8 @@ const searchBar = $(".search-bar");
 const locationElem = $("#location");
 const currentConditionElem = $("#current-condition");
 const currentTemperatureElem = $("#current-temperature");
+const currentHighTemperatureElem = $("#current-high-temperature");
+const currentLowTemperatureElem = $("#current-low-temperature");
 const currentHumidityElem = $("#current-humidity");
 const currentWindspeedElem = $("#current-windspeed");
 const weatherForecastElems = $(".weather-forecast-item");
@@ -18,6 +20,7 @@ function kelvinToFahrenheit(kelvin) {
 
 // function that's updating weather display
 function updateWeatherDisplay(data) {
+  // console.log('Updating weather display:', data);
   // getting city name and weather data list from response
   const cityName = data.city.name;
   const { list } = data;
@@ -27,6 +30,12 @@ function updateWeatherDisplay(data) {
   currentConditionElem.text(list[0].weather[0].description);
   currentTemperatureElem.text(
     kelvinToFahrenheit(list[0].main.temp).toFixed(1) + "°F"
+  );
+  currentHighTemperatureElem.text(
+    kelvinToFahrenheit(list[0].main.temp_max).toFixed(1) + "°F"
+  );
+  currentLowTemperatureElem.text(
+    kelvinToFahrenheit(list[0].main.temp_min).toFixed(1) + "°F"
   );
   currentHumidityElem.text(list[0].main.humidity + "%");
   currentWindspeedElem.text(list[0].wind.speed + " mph");
@@ -39,7 +48,7 @@ function updateWeatherDisplay(data) {
     const date = new Date(forecast.dt_txt);
     const day = date.toLocaleDateString("en-US", { weekday: "short" });
     // getting weather icon
-    const iconId = forcast.weather[0].icon;
+    const iconId = forecast.weather[0].icon;
     const iconUrl = `http://openweathermap.org/img/wn/${iconId}.png`;
     // updating DOM elements for the forecast using find and a loop to find the id and appending it.
     weatherForecastElems.eq(i).find(".day").text(day);
@@ -85,4 +94,19 @@ function fetchWeatherData(cityName) {
     });
 }
 
-// 
+// event listener for the search button click event
+searchButton.on("click", () => {
+  // getting the city name entered in the search bar and trim any leading/trailing whitespace (this was also stack overflow)
+  const cityName = searchBar.val().trim();
+  if (cityName) {
+    fetchWeatherData(cityName);
+    // clearing the search bar
+    searchBar.val("");
+  } else {
+    // displaying an alert if no city name was entered
+    alert("Please enter a city name.");
+  }
+});
+
+// fetch and display the weather data for austin as the default city when the page loads
+fetchWeatherData("Austin");
