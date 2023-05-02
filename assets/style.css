@@ -53,3 +53,78 @@ body {
   align-items: center;
   width: 100%;
 }
+
+.current-weather {
+  display: flex;
+  flex-wrap: none;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.weather-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+#current-icon {
+  height: 5rem;
+  width: 5rem;
+  margin-left: 10px;
+}
+
+/* future forcast */
+.future-forecast {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.weather-forecast-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  min-width: 120px;
+}
+
+.forecast-icon {
+  height: 5rem;
+  width: 5rem;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .card {
+    padding: 15px;
+  }
+  .weather-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .current-time,
+  .current-date {
+    font-size: 1rem;
+  }
+  .search-bar {
+    margin-right: 5px;
+  }
+  button svg {
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+  .weather-forecast-item {
+    min-width: 100px;
+  }
+}
