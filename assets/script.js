@@ -56,18 +56,14 @@ function updateWeatherDisplay(data) {
     weatherForecastElems.eq(i).find("img").attr("src", iconUrl);
     weatherForecastElems
       .eq(i)
-      .find("#day-" + (i + 1))
-      .text("Day: " + kelvinToFahrenheit(forecast.main.temp).toFixed(1) + "°F");
-    weatherForecastElems
-      .eq(i)
-      .find("#night-" + (i + 1))
+      .find("#temp-" + (i + 1))
       .text(
-        "Night: " + kelvinToFahrenheit(forecast.main.temp).toFixed(1) + "°F"
+        "Temp: " + kelvinToFahrenheit(forecast.main.temp).toFixed(1) + "°F"
       );
     weatherForecastElems
       .eq(i)
       .find("#humidity-" + (i + 1))
-      .text("Humidity: " + forecast.main.humidity + "%");
+      .text("Humidity: " + forecast.main.humidity + " %");
     weatherForecastElems
       .eq(i)
       .find("#windspeed-" + (i + 1))
@@ -79,10 +75,10 @@ function updateWeatherDisplay(data) {
 function fetchWeatherData(cityName) {
   const cityUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
 
-  // Fetch the background image from Unsplash
+  // fetch the background image from Unsplash
   const unsplashUrl = `https://api.unsplash.com/search/photos?query=${cityName}&client_id=${unsplashApiKey}&per_page=1&orientation=landscape`;
 
-  // Fetch both the weather data and the Unsplash image
+  // fetch both the weather data and the unsplash image
   Promise.all([$.get(cityUrl), $.get(unsplashUrl)])
     .then((responses) => {
       const weatherData = responses[0];
@@ -101,7 +97,7 @@ function fetchWeatherData(cityName) {
         $(".weather-forecast-item").css("background-image", `url(${imageUrl})`);
       }
 
-      // Fetch the forecast data and update the weather display
+      // fetch the forecast data and update the weather display
       return $.get(weatherUrl);
     })
     .then((data) => {
@@ -114,30 +110,57 @@ function fetchWeatherData(cityName) {
     });
 }
 
-// function to make keyboard event for "enter"
+function loadSavedCitiesAndFetchWeather() {
+  const savedCityNames = JSON.parse(localStorage.getItem("cityNames")) || [];
+  if (savedCityNames.length > 0) {
+    $("#saved-cities").empty();
+    savedCityNames.forEach((cityName) => {
+      const cityElement = $(`<a>${cityName}</a>`);
+      cityElement.click(function () {
+        fetchWeatherData(cityName);
+      });
+      $("#saved-cities").append(cityElement);
+    });
+    fetchWeatherData(savedCityNames[savedCityNames.length - 1]);
+  } else {
+    fetchWeatherData("Austin");
+  }
+}
+
+$(document).ready(loadSavedCitiesAndFetchWeather);
+
+searchButton.click(function () {
+  const cityName = searchBar.val().trim();
+  if (cityName) {
+    searchBar.val("");
+    let savedCities = JSON.parse(localStorage.getItem("cityNames")) || [];
+    if (!savedCities.includes(cityName)) {
+      savedCities.push(cityName);
+      localStorage.setItem("cityNames", JSON.stringify(savedCities));
+      const cityElement = $(`<a>${cityName}</a>`);
+      cityElement.click(function () {
+        fetchWeatherData(cityName);
+      });
+      $("#saved-cities").append(cityElement);
+    }
+    fetchWeatherData(cityName);
+    loadSavedCitiesAndFetchWeather();
+  }
+});
+
 function handleKeyPress(e) {
   if (e.key === "Enter") {
     const cityName = searchBar.val().trim();
     if (cityName) {
       searchBar.val("");
+      let savedCities = JSON.parse(localStorage.getItem("cityNames")) || [];
+      if (!savedCities.includes(cityName)) {
+        savedCities.push(cityName);
+        localStorage.setItem("cityNames", JSON.stringify(savedCities));
+        $("#saved-cities").append(`<a>${cityName}</a>`);
+      }
       fetchWeatherData(cityName);
+      loadSavedCitiesAndFetchWeather();
     }
   }
 }
-
-// event listener for the search button click event
-searchButton.on("click", () => {
-  // getting the city name entered in the search bar and trim any leading/trailing whitespace (this was also stack overflow)
-  const cityName = searchBar.val().trim();
-  if (cityName) {
-    searchBar.val("");
-    fetchWeatherData(cityName);
-    // clearing the search bar
-  } else {
-    // displaying an alert if no city name was entered
-    alert("Please enter a city name.");
-  }
-});
-
-// fetch and display the weather data for austin as the default city when the page loads
-fetchWeatherData("Austin");
