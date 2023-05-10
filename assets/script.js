@@ -62,11 +62,11 @@ function updateWeatherDisplay(data) {
       );
     weatherForecastElems
       .eq(i)
-      .find("#humidity-" + (i + 1))
+      .find("#humidity-" + (i + 1 + 1))
       .text("Humidity: " + forecast.main.humidity + " %");
     weatherForecastElems
       .eq(i)
-      .find("#windspeed-" + (i + 1))
+      .find("#windspeed-" + (i + 1 + 1))
       .text("Windspeed: " + forecast.wind.speed + " mph");
   }
 }
