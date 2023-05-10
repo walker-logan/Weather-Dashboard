@@ -38,12 +38,10 @@ body {
   box-shadow: 0 4px 10px rgb(0, 0, 0);
   text-shadow: 0px 0px 10px rgb(0, 0, 0);
   max-width: 400px;
-  width: 100%;
   padding: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
 }
 
 .search {
@@ -96,15 +94,15 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  max-width: 100%;
   margin: 15px;
 }
 
 .current-weather {
   display: flex;
-  flex-wrap: none;
+  flex-wrap: wrap;
   justify-content: center;
-  width: 100%;
+  max-width: 100%;
 }
 
 .weather-item {
